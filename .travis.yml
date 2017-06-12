@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.6"
+  - "nightly" # currently points to 3.7-dev
+node_js:
+  - "7"
+
+services:
+  - docker
+
+# command to install dependencies
+before_script:
+  - "cd backend && pip3 install -r requirements.txt && cd .."
+  - "cd frontend && npm install && cd .."
+
+# Create docker images
+script:
+  - cd backend && docker build -t sentiment_backend . && cd ..
+  - cd frontend && docker build -t sentiment_frontend . && cd ..
+
+# command to run tests
+#script: cd ./backend/sentiment_analysis/ && python3 manage.py migrate && cd ...
+#script: cd ./backend/sentiment_analysis/ && python3 manage.py test && cd ...
