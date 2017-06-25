@@ -75,10 +75,19 @@ WSGI_APPLICATION = 'sentiment_analysis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+name = os.getenv('DATABASE_NAME')
+user = os.getenv('DATABASE_USER')
+password = os.getenv('DATABASE_PASSWORD')
+host = os.getenv('DATABASE_HOST')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': name,
+        'USER': user,
+        'PASSWORD': password,
+        'HOST': host,
+        'PORT': '5432',
     }
 }
 
